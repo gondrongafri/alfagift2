@@ -1,0 +1,172 @@
+<?php
+error_reporting ( E_ALL ^ E_WARNING );
+error_reporting ( E_ALL ^ E_DEPRECATE );
+Selamat datang:
+fungsi  curl ( $ url , $ header , $ data ){
+    $ curl = curl_init ( $ url );
+    curl_setopt ( $ curl , CURLOPT_URL , $ url );
+    curl_setopt ( $ curl , CURLOPT_POST , benar );
+    curl_setopt ( $ curl , CURLOPT_RETURNTRANSFER , benar );
+    curl_setopt ( $ curl , CURLOPT_HTTPHEADER , $ header );
+    curl_setopt ( $ curl , CURLOPT_POSTFIELDS , $ data );
+    curl_setopt ( $ curl , CURLOPT_SSL_VERIFYHOST , false );
+    curl_setopt ( $ curl , CURLOPT_SSL_VERIFYPEER , false );
+    $ resp = curl_exec ( $ curl );
+    curl_close ( $ curl );
+    kembali  $ resp ;
+    }
+$ random1 = rand ( 11111111 , 99999999 );
+$ random2 = rand ( 11111111 , 99999999 );
+$ random3 = rand ( 1119 , 9999 );
+$ random4 = rand ( 1 , 9999 );
+
+$ deviceid = "$random1-936d-974b-a9ef-$random2$random3" ;
+$ deviceid2 = "\"$deviceid\"" ;
+gema  "\n" ;
+gema  "\n" ;
+echo  "| Selamat datang di ALFAGIFT ACCOUNT GENERATOR!! \n" ;
+echo  "| Skrip sederhana oleh Arie \n" ;
+echo  "| Wa 085782946968 \n" ;
+echo  "| --------------------------- \n" ;
+if ( file_exists ( "config.json" )){
+    $ arr2 = json_decode ( file_get_contents ( 'config.json' ), true );
+    $ token = $ arr2 [ 'token' ];
+    $ memberd = $ arr2 [ 'id' ];
+    $ hp = $ arr2 [ 'hp' ];
+    echo  "| Anda sudah login menggunakan nomer hp $hp \n" ;
+    echo  "| 1. Masuk \n" ;
+    echo  "| 2. Daftar \n" ;
+    echo  "| Pilih: " ;
+    $ pilih = trim ( fgets ( STDIN ));
+    if ( $ pilih !== '1' ){
+        masuk daftar;
+    } else {masuk masuk;}
+}
+daftar:
+echo  "| Masukan Nomor HP : " ;
+$ nomorhp = trim ( fgets ( STDIN ));
+$ nomorhp = "\"$nomorhp\"" ;
+
+$ data_otp = '{"action":"REGISTER","mobileNumber":' . $ nomor hp . ',"ketik":0}' ;
+$ header_otp = larik (
+    "terima: aplikasi/json" ,
+    "terima-bahasa: id" ,
+    "nama versi: 4.0.30" ,
+    "nomor versi: 403016" ,
+    "model perangkat: Xiaomi Redmi Note 8" ,
+    "nama paket: com.alfamart.alfagift" ,
+    "tanda tangan: 6E:41:03:61:A5:09:55:05:B6:84:84:C9:75:0B:89:56:5D:1D:41:C7" ,
+    "lintang: 0.0" ,
+    "bujur: 0.0" ,
+    "deviceid: $deviceid" ,
+    "Jenis Konten: aplikasi/json" ,
+    "agen-pengguna: okhttp/3.14.4" ,
+);
+$ url_otp = "https://api.alfagift.id/v1/otp/request" ;
+$ get_otp = curl ( $ url_otp , $ header_otp , $ data_otp );
+$ get_otp = json_decode ( $ get_otp , benar );
+$ status = $ get_otp [ 'status' ][ 'kode' ];
+if ( $ status == "00" ){
+    $ pesan = $ get_otp [ 'otpDescription' ];
+    echo  "| $pesan \n" ;
+} elseif ( $ status == "01" ){
+    $ pesan = $ get_otp [ 'otpDescription' ];
+    echo  "| $pesan \n" ;
+} else { echo  "| Gagal" ; mati;}
+
+pilihan:
+echo  "| Masukan KODE OTP : " ;
+$ otp = potong ( fgets ( STDIN ));
+$ otp = "\"$otp\"" ;
+$ url_verif_otp = "https://api.alfagift.id/v1/otp/verify" ;
+$ data_otp_login = '{"action":"REGISTER","mobileNumber":' . $ nomor hp . ',"Kode otp":' . $ otp . ',"ketik":0}' ;
+$ verif_otp = curl ( $ url_verif_otp , $ header_otp , $ data_otp_login );
+$ verif_otp = json_decode ( $ verif_otp , benar );
+$ status_login = $ verif_otp [ 'status' ][ 'kode' ];
+if ( $ status_login !== "00" ){
+    $ pesan = $ verif_otp [ 'verifyOtpDescription' ];
+    echo  "| $pesan \n" ;
+    harus otp;
+} lain {
+    $ token = $ verif_otp [ 'token' ];
+    $ token2 = "\"$token\"" ;
+}
+
+
+$ url_daftar = "https://api.alfagift.id/v1/account/member/create" ;
+$ random_name = "Arie" . " " . substr ( str_shuffle ( "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" ), 0 , 4 );
+$ random_email = substr ( str_shuffle ( "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" ), 0 , 7 );
+$ random_name = "\"$random_name\"" ;
+$ random_email = "\"$random_email@gmail.com\"" ;
+$ data_create = '{"address":"","birthDate":"1991-10-11","debug":false,"deviceId":' . $ deviceid2 . ',"email":' . $ random_email . ',"namadepan":"","namalengkap":' . $ random_name . ',"gender":"F","lastName":"","lintang":0,"bujur":0,"nikahStatus":"M","sandi":"akun1212","telepon":' . $ nomor hp . ',"Kodepos":"","daftarPonta" :benar,"token":' . $ token2 . '}' ;
+$ create_akun = curl ( $ url_daftar , $ header_otp , $ data_create );
+$ put = file_put_contents ( 'createakunalfa.txt' , $ create_akun );
+$ create_akun = json_decode ( $ create_akun , benar );
+$ status_create = $ create_akun [ 'status' ][ 'kode' ];
+if ( $ status_create !== "00" ){
+    $ pesan = $ create_akun [ 'status' ][ 'pesan' ];
+    echo  "| $pesan" ;
+    mati;
+} lain {
+    $ pesan = $ create_akun [ 'status' ][ 'pesan' ];
+    echo  "| Status: $pesan \n" ;
+    $ memberid = $ create_akun [ 'memberId' ];
+    $ token = $ create_akun [ 'status' ][ 'token' ];
+    $ id_ponta = $ create_akun [ 'member' ][ 'ponta' ][ 'accountCard' ];
+    $ no_hp = $ create_akun [ 'member' ][ 'ponta' ][ 'phoneNumber' ];
+    echo  "| Sukses daftar!!! \n" ;
+    echo  "| Nomer hp $no_hp dan password MantapJiwa \n" ;
+    echo  "| Anggota Ponta $id_ponta \n" ;
+    echo  "| Memuat voucher \n" ;
+    tidur ( 4 );
+    $ arr1 = [ "token" => $ token , "id" => $ memberd , "hp" => $ no_hp ];
+    file_put_contents ( "config.json" , json_encode ( $ arr1 ));
+    $ file = fopen ( "alfajoss.txt" , "a" );  
+    fwrite ( $ file , "------------------------------------------- ------------" . PHP_EOL );
+    fwrite ( $ file , "$no_hp & Nomor PONTA : $id_ponta" . PHP_EOL );
+    fwrite ( $ file , "------------------------------------------- ------------" . PHP_EOL );
+    fclose ( $ file );
+    masuk masuk;
+}
+
+
+
+Gabung:
+$ heder_jadi = larik (
+    "terima: aplikasi/json" ,
+    "terima-bahasa: id" ,
+    "nama versi: 4.0.30" ,
+    "nomor versi: 403016" ,
+    "model perangkat: Xiaomi Redmi Note 8" ,
+    "nama paket: com.alfamart.alfagift" ,
+    "tanda tangan: 6E:41:03:61:A5:09:55:05:B6:84:84:C9:75:0B:89:56:5D:1D:41:C7" ,
+    "lintang: 0.0" ,
+    "bujur: 0.0" ,
+    "deviceid: $deviceid" ,
+    "token: $token" ,
+    "id: $memberid" ,
+    "Jenis Konten: aplikasi/json" ,
+    "agen-pengguna: okhttp/3.14.4" ,
+);
+ $ url_login = "https://api.alfagift.id/v1/promotion/myVoucher" ;
+ $ data_login = '{"limit":10,"start":0}' ;
+ $ asal = curl ( $ url_login , $ heder_jadi , $ data_login );
+ $ login = json_decode ( $ asal , benar );
+ $ status = $ login [ 'status' ][ 'kode' ];
+ if ( $ status == "00" ){
+    $ total_voucher = $ login [ 'totalVoucher' ];
+    if ( $ total_voucher == null ){
+        echo  "| Voucher Kosong!!! \n" ;
+        
+    } elseif ( $ total_voucher !== null ){
+        echo  "| Jumlah voucher = $total_voucher \n" ;
+        $ voucher = $ login [ 'voucher' ];
+        print_r ( $ voucher );
+        
+    }
+}
+
+selamat Datang;
+
+
+
