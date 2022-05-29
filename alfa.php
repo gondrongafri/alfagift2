@@ -53,7 +53,7 @@ $header_otp = array(
     "accept-language: id",
     "versionname: 4.0.30",
     "versionnumber: 403016",
-    "devicemodel: Xiaomi Redmi Note 8",
+    "devicemodel: Xiaomi Redmi Note 9",
     "packagename: com.alfamart.alfagift",
     "signature: 6E:41:03:61:A5:09:55:05:B6:84:84:C9:75:0B:89:56:5D:1D:41:C7",
     "latitude: 0.0",
@@ -115,7 +115,7 @@ if($status_create !== "00"){
     $id_ponta = $create_akun['member']['ponta']['accountCard'];
     $no_hp = $create_akun['member']['ponta']['phoneNumber'];
     echo "| Sukses daftar!!! \n";
-    echo "| Nomer hp $no_hp dan password MantapJiwa \n";
+    echo "| Nomer hp $no_hp dan password Afrika50 \n";
     echo "| Member Ponta $id_ponta \n";
     echo "| Loading voucher \n";
     sleep(4);
@@ -137,7 +137,7 @@ $heder_jadi = array(
     "accept-language: id",
     "versionname: 4.0.30",
     "versionnumber: 403016",
-    "devicemodel: Xiaomi Redmi Note 8",
+    "devicemodel: Xiaomi Redmi Note 9",
     "packagename: com.alfamart.alfagift",
     "signature: 6E:41:03:61:A5:09:55:05:B6:84:84:C9:75:0B:89:56:5D:1D:41:C7",
     "latitude: 0.0",
